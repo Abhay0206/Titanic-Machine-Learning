@@ -1,0 +1,66 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+train = pd.read_csv('D:\Kaggle Projects\Titanic Kaggle Compition\\train.csv')
+
+train.head()
+
+train.shape
+
+test = pd.read_csv('D:\Kaggle Projects\Titanic Kaggle Compition\\test.csv')
+
+test.head()
+
+train['Survived'].value_counts()
+
+train['Survived'].value_counts().keys()
+
+plt.figure(figsize=(6, 6))
+plt.bar(list(train['Survived'].value_counts().keys()),list(train['Survived'].value_counts()), color = ["r", "g"])
+plt.show()
+
+train["Pclass"].value_counts()
+
+plt.figure(figsize=(6,6))
+plt.bar(list(train["Pclass"].value_counts().keys()), list(train["Pclass"].value_counts()), color = ["b", "g", "r"])
+plt.show()
+
+train["Sex"].value_counts()
+
+plt.figure(figsize=(6,6))
+plt.bar(list(train["Sex"].value_counts().keys()), list(train["Sex"].value_counts()), color = ["b", "r"])
+plt.show()
+
+plt.figure(figsize=(6,6))
+plt.hist(train["Age"])
+plt.title("Distribution of Age")
+plt.xlabel("Age")
+plt.show()
+
+train.isnull().sum()
+
+train.dropna(inplace=True)
+
+train.isnull().sum()
+
+x_train = train[['Age']]
+y_train = train[['Survived']]
+
+from sklearn.tree import DecisionTreeClassifier
+
+dtc = DecisionTreeClassifier()
+
+dtc.fit(x_train, y_train)
+
+test.isnull().sum()
+
+test.dropna(inplace=True)
+
+test.isnull().sum()
+
+x_test = test[['Age']]
+
+y_pred = dtc.predict(x_test)
+
+y_pred
